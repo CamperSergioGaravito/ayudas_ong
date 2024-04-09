@@ -10,4 +10,6 @@ public interface SocioRepository extends CrudRepository<Socio, Long> {
     
     Optional<Socio> findByEmail(final String email);
 
+    Socio findByCedula(long cedula);
+
 }

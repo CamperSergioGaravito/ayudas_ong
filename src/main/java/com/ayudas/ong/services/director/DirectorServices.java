@@ -1,4 +1,4 @@
-package com.ayudas.ong.services;
+package com.ayudas.ong.services.director;
 
 import com.ayudas.ong.repositories.entities.Director;
 

@@ -1,10 +1,10 @@
-package com.ayudas.ong.services.director;
+package com.ayudas.ong.services.director.imp;
 
 import org.springframework.stereotype.Service;
 
 import com.ayudas.ong.repositories.DirectorRepository;
 import com.ayudas.ong.repositories.entities.Director;
-import com.ayudas.ong.services.DirectorServices;
+import com.ayudas.ong.services.director.DirectorServices;
 
 import lombok.AllArgsConstructor;
 
