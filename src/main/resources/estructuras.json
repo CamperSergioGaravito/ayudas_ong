@@ -1,0 +1,15 @@
+{
+    "Crear socio":
+    
+    {
+        "cedula": 1212345,
+        "email": "socio@mail.com",
+        "p_nombre": "Fabio",
+        "s_nombre": "",
+        "p_apellido": "",
+        "s_apellido": "",
+        "rol": "",
+        "cuentaBancaria": 123987456,
+        "sede": ""
+    }
+}

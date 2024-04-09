@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -28,18 +29,21 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http)
             throws Exception {
-        http.sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-        var requestHandler = new CsrfTokenRequestAttributeHandler();
-        requestHandler.setCsrfRequestAttributeName("_csrf");
-        http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
-                .anyRequest().permitAll())
-                .formLogin(Customizer.withDefaults())
-                .httpBasic(Customizer.withDefaults());
-        http.addFilterAfter(jwtValidationFilter, BasicAuthenticationFilter.class);
-        http.cors(cors -> corsConfigurationSource());
-        http.csrf(csrf -> csrf.disable());
-        return http.build();
+                var requestHandler = new CsrfTokenRequestAttributeHandler();
+                requestHandler.setCsrfRequestAttributeName("_csrf");
+                http.sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                http.authorizeHttpRequests(auth -> auth
+                            .requestMatchers("/api/v1/crear/socio").authenticated()
+                            .requestMatchers("/api/v1/crear/**", "/api/v1/admin/**").hasRole("ADMIN")
+                            .anyRequest().permitAll())
+                        .addFilterAfter(jwtValidationFilter, BasicAuthenticationFilter.class);
+                http.cors(cors -> corsConfigurationSource());
+                http.csrf(csrf -> csrf.disable());
+                /* http.csrf(csrf -> csrf
+                        .csrfTokenRequestHandler(requestHandler)
+                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
+                        .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class); */
+                return http.build();
     }
 
     @Bean
