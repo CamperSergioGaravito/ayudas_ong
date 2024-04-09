@@ -1,0 +1,16 @@
+{
+    "Crear socio":
+    
+    {
+        "cedula": 1212345,
+        "email": "socio@mail.com",
+        "passWord": "asd123",
+        "p_nombre": "Fabio",
+        "s_nombre": null,
+        "p_apellido": "Patiño",
+        "s_apellido": null,
+        "cuentaBancaria": 123987456,
+        "sede": "sede A",
+        "rol": "assistant"
+    }
+}
