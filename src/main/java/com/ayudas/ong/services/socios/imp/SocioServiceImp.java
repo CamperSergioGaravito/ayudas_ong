@@ -12,6 +12,7 @@ import com.ayudas.ong.repositories.entities.Sede;
 import com.ayudas.ong.repositories.entities.Socio;
 import com.ayudas.ong.repositories.models.dtos.SocioDTO;
 import com.ayudas.ong.repositories.models.dtos.SocioDTOcrear;
+import com.ayudas.ong.repositories.models.dtos.SocioDTOupdate;
 import com.ayudas.ong.services.rol.imp.RolServiceImpPriv;
 import com.ayudas.ong.services.sede.SedeServicesPriv;
 import com.ayudas.ong.services.socios.SocioServices;
@@ -33,16 +34,10 @@ public class SocioServiceImp implements SocioServices {
     @Override
     public List<SocioDTO> findAll() {
         List<SocioDTO> sDtos = new ArrayList<>();
-        for(Socio socio : socioRepository.findAll()) {
+        for (Socio socio : socioRepository.findAll()) {
             sDtos.add(socioDTOConvert.socioToDTO(socio));
         }
         return sDtos;
-    }
-
-    @Override
-    public SocioDTO findById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
     }
 
     @Transactional
@@ -54,21 +49,39 @@ public class SocioServiceImp implements SocioServices {
     }
 
     @Override
-    public SocioDTO update(Long id, SocioDTO socioDTO) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    public SocioDTO update(Long cedula, SocioDTOupdate socioDTOupdate) throws ManagerAccessExcp {
+        Socio socio = socioServicePrivImp.findByCedula(cedula);
+
+        if(socio == null) {
+            throw new ManagerAccessExcp("Socio no existente", new Throwable(" El socio que se intenta actualizar, no existe"));
+        }
+        else {
+            socio = socioDTOConvert.socioCargarDataDtoUpdate(socio, socioDTOupdate);
+            return socioDTOConvert.socioToDTO(socioRepository.save(socio));
+        }
+
     }
 
     @Override
-    public void delete(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+    public void delete(Long cedula) {
+        Socio socio = socioServicePrivImp.findByCedula(cedula);
+
+        if (socio == null) {
+            throw new ManagerAccessExcp("Socio no encontrado", new Throwable(" El socio que se intenta eliminar, no existe"));
+        } else {
+            socioRepository.delete(socio);
+        }
     }
 
     @Override
     public SocioDTO findByEmail(String email) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findByEmail'");
+        Socio socio = socioServicePrivImp.findByEmail(email);
+
+        if (socio == null) {
+            throw new ManagerAccessExcp("Socio no encontrado", new Throwable(" El socio que se intenta buscar, no se encuentra"));
+        } else {
+            return socioDTOConvert.socioToDTO(socio);
+        }
     }
 
     @Transactional
@@ -77,30 +90,35 @@ public class SocioServiceImp implements SocioServices {
 
         Socio socio = socioServicePrivImp.findByCedula(socioDTOcrear.getCedula());
 
-        System.out.println(socio);
-
-        if(socio != null) {
+        if (socio != null) {
             throw new ManagerAccessExcp("Socio existente", new Throwable(" El socio que se intenta crear, ya existe"));
-        }
-        else {
+        } else {
             socioDTOcrear.setRol(socioDTOcrear.getRol().toUpperCase());
 
             Rol rol = rolServiceImpPriv.findByNombre(socioDTOcrear.getRol());
             Sede sede = sedeServicesPriv.findByNombre(socioDTOcrear.getSede());
 
-            if(sede == null) {
-                throw new ManagerAccessExcp("Dato no encontrado", new Throwable(" ( Sede ) " + socioDTOcrear.getSede() + " no se encuentra registrada"));
+            if (sede == null) {
+                throw new ManagerAccessExcp("Dato no encontrado",
+                        new Throwable(" ( Sede ) " + socioDTOcrear.getSede() + " no se encuentra registrada"));
             }
-            if(rol == null) {
-                throw new ManagerAccessExcp("Dato no encontrado", new Throwable(" ( Rol ) " + socioDTOcrear.getRol() + " no se encuentra registrada"));
+            if (rol == null) {
+                throw new ManagerAccessExcp("Dato no encontrado",
+                        new Throwable(" ( Rol ) " + socioDTOcrear.getRol() + " no se encuentra registrada"));
             }
 
             System.out.println(sede.toString());
-            
+
             return socioDTOConvert.socioToDTO(
                     socioRepository.save(socioDTOConvert.socioDtoCrearToEntity(socioDTOcrear, rol, sede)));
         }
 
+    }
+
+    @Override
+    public SocioDTO findByCedula(long cedula) {
+        return socioDTOConvert.socioToDTO(
+                socioRepository.findByCedula(cedula));
     }
 
 }

@@ -33,8 +33,8 @@ public class SecurityConfig {
                 requestHandler.setCsrfRequestAttributeName("_csrf");
                 http.sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
                 http.authorizeHttpRequests(auth -> auth
-                            .requestMatchers("/api/v1/crear/socio").authenticated()
-                            .requestMatchers("/api/v1/crear/**", "/api/v1/admin/**").hasRole("ADMIN")
+                            .requestMatchers("/api/v1/admin/**").authenticated()
+                            .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
                             .anyRequest().permitAll())
                         .addFilterAfter(jwtValidationFilter, BasicAuthenticationFilter.class);
                 http.cors(cors -> corsConfigurationSource());

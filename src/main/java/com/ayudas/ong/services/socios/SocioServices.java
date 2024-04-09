@@ -4,21 +4,22 @@ import java.util.List;
 
 import com.ayudas.ong.repositories.models.dtos.SocioDTO;
 import com.ayudas.ong.repositories.models.dtos.SocioDTOcrear;
+import com.ayudas.ong.repositories.models.dtos.SocioDTOupdate;
 
 public interface SocioServices {
 
     List<SocioDTO> findAll();
 
-    SocioDTO findById(final Long id);
-
     SocioDTO crear(final SocioDTOcrear socioDTOcrear);
 
     SocioDTO save(final SocioDTO socioDTO);
 
-    SocioDTO update(final Long id, final SocioDTO socioDTO);
+    SocioDTO update(final Long cedula, final SocioDTOupdate socioDTO);
 
-    void delete(final Long id);
+    void delete(final Long cedula);
 
     SocioDTO findByEmail(final String email);
+
+    SocioDTO findByCedula(long cedula);
     
 }
