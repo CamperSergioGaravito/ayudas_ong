@@ -7,12 +7,15 @@ import org.springframework.stereotype.Service;
 
 import com.ayudas.ong.config.modelMapper.converters.SocioDTOConvert;
 import com.ayudas.ong.repositories.SocioRepository;
+import com.ayudas.ong.repositories.entities.Rol;
+import com.ayudas.ong.repositories.entities.Sede;
 import com.ayudas.ong.repositories.entities.Socio;
-import com.ayudas.ong.repositories.models.dtos.RolDTO;
 import com.ayudas.ong.repositories.models.dtos.SocioDTO;
 import com.ayudas.ong.repositories.models.dtos.SocioDTOcrear;
-import com.ayudas.ong.services.rol.RolServices;
+import com.ayudas.ong.services.rol.imp.RolServiceImpPriv;
+import com.ayudas.ong.services.sede.SedeServicesPriv;
 import com.ayudas.ong.services.socios.SocioServices;
+import com.ayudas.ong.util.exceptions.data_access.ManagerAccessExcp;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -23,7 +26,8 @@ public class SocioServiceImp implements SocioServices {
 
     private final SocioRepository socioRepository;
     private final SocioDTOConvert socioDTOConvert;
-    private final RolServices rolServices;
+    private final RolServiceImpPriv rolServiceImpPriv;
+    private final SedeServicesPriv sedeServicesPriv;
 
     @Override
     public List<SocioDTO> findAll() {
@@ -68,11 +72,25 @@ public class SocioServiceImp implements SocioServices {
 
     @Transactional
     @Override
-    public SocioDTO crear(SocioDTOcrear socioDTOcrear) {
-        RolDTO rolDTO = rolServices.findByNombre(socioDTOcrear.getRol());
-        Socio socio = socioDTOConvert.socioDtoCrearToEntity(socioDTOcrear, rolDTO);
+    public SocioDTO crear(SocioDTOcrear socioDTOcrear) throws ManagerAccessExcp {
+
+        socioDTOcrear.setRol(socioDTOcrear.getRol().toUpperCase());
+
+        Rol rol = rolServiceImpPriv.findByNombre(socioDTOcrear.getRol());
+        Sede sede = sedeServicesPriv.findByNombre(socioDTOcrear.getSede());
+
+        if(sede == null) {
+            throw new ManagerAccessExcp("Dato no encontrado", new Throwable(" ( Sede ) " + socioDTOcrear.getSede() + " no se encuentra registrada"));
+        }
+        if(rol == null) {
+            throw new ManagerAccessExcp("Dato no encontrado", new Throwable(" ( Rol ) " + socioDTOcrear.getRol() + " no se encuentra registrada"));
+        }
+
+        System.out.println(sede.toString());
+        
         return socioDTOConvert.socioToDTO(
-                socioRepository.save(socio));
+                socioRepository.save(socioDTOConvert.socioDtoCrearToEntity(socioDTOcrear, rol, sede)));
+
     }
 
 }

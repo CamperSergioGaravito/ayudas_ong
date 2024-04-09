@@ -23,6 +23,8 @@ public class SocioDTOcrear {
 
     private String email;
 
+    private String passWord;
+
     private Long cuentaBancaria;
 
     private String sede;

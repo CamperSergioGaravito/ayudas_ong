@@ -7,10 +7,14 @@ import java.util.List;
 import com.ayudas.ong.repositories.enums.TipoMaterial;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 
 public class EnvioDTO implements Serializable {
 

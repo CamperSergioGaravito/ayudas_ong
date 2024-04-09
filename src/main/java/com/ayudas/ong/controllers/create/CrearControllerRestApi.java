@@ -2,7 +2,6 @@ package com.ayudas.ong.controllers.create;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ayudas.ong.repositories.enums.Roles;
 import com.ayudas.ong.repositories.models.dtos.SocioDTO;
 import com.ayudas.ong.repositories.models.dtos.SocioDTOcrear;
 import com.ayudas.ong.services.socios.SocioServices;
@@ -35,7 +34,6 @@ public class CrearControllerRestApi {
     @PostMapping("/socio")
     public ResponseEntity<Map<String, Object>> crear(@Valid @RequestBody SocioDTOcrear socio, BindingResult result) {
 
-        System.out.println(Roles.valueOf(socio.getRol()));
         SocioDTO socioDTO = null;
         Map<String,Object> response = new HashMap<>();
 

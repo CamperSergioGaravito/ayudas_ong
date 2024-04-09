@@ -19,6 +19,6 @@ public interface RolServices {
 
     void delete(final Long id);
 
-    RolDTO findByNombre(String nombre);
+    RolDTO findByNombre(final String nombre);
 
 }

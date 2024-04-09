@@ -4,8 +4,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ayudas.ong.repositories.entities.Rol;
+import com.ayudas.ong.repositories.entities.Sede;
 import com.ayudas.ong.repositories.entities.Socio;
-import com.ayudas.ong.repositories.models.dtos.RolDTO;
 import com.ayudas.ong.repositories.models.dtos.SocioDTO;
 import com.ayudas.ong.repositories.models.dtos.SocioDTOcrear;
 
@@ -22,6 +23,8 @@ public class SocioDTOConvert {
         SocioDTO socioDTO = model.map(socio, SocioDTO.class);
         socioDTO.setRol(
                 rolDTOConvert.RolToDTO(socio.getRol()));
+        
+        socioDTO.setSede(socio.getSede().getNombre());
 
         return socioDTO;
     }
@@ -34,18 +37,10 @@ public class SocioDTOConvert {
         return socio;
     }
 
-    public Socio socioDtoCrearToEntity(SocioDTOcrear socioDTOcrear, RolDTO rolDTO) {
-        Socio socio = new Socio();
-        socio.setRol(
-                rolDTOConvert.RolDtoToEntity(rolDTO));
-
-        socio.setCedula(socioDTOcrear.getCedula());
-        socio.setEmail(socioDTOcrear.getEmail());
-        socio.setP_nombre(socioDTOcrear.getP_nombre());
-        socio.setS_nombre(socioDTOcrear.getS_nombre());
-        socio.setP_apellido(socioDTOcrear.getP_apellido());
-        socio.setS_apellido(socioDTOcrear.getS_apellido());
-        
+    public Socio socioDtoCrearToEntity(SocioDTOcrear socioDTOcrear, Rol rol, Sede sede) {
+        Socio socio = model.map(socioDTOcrear, Socio.class);
+        socio.setRol(rol);
+        socio.setSede(sede);
 
         return socio;
     }

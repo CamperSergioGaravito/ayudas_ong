@@ -65,5 +65,45 @@ public abstract class Persona implements Serializable {
         this.email = email;
         this.passWord = passWord;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Persona other = (Persona) obj;
+        if (cedula != other.cedula)
+            return false;
+        if (p_nombre == null) {
+            if (other.p_nombre != null)
+                return false;
+        } else if (!p_nombre.equals(other.p_nombre))
+            return false;
+        if (p_apellido == null) {
+            if (other.p_apellido != null)
+                return false;
+        } else if (!p_apellido.equals(other.p_apellido))
+            return false;
+        if (email == null) {
+            if (other.email != null)
+                return false;
+        } else if (!email.equals(other.email))
+            return false;
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (int) (cedula ^ (cedula >>> 32));
+        result = prime * result + ((p_nombre == null) ? 0 : p_nombre.hashCode());
+        result = prime * result + ((p_apellido == null) ? 0 : p_apellido.hashCode());
+        result = prime * result + ((email == null) ? 0 : email.hashCode());
+        return result;
+    }
     
 }

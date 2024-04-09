@@ -44,7 +44,43 @@ public class Ingreso implements Serializable {
     @Temporal(TemporalType.DATE)
     private LocalDate fechaPago;
 
-    private void setCuota() {
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Socio getSocio() {
+        return socio;
+    }
+
+    public void setSocio(Socio socio) {
+        this.socio = socio;
+    }
+
+    public TiposCuenta getTipoCuenta() {
+        return tipoCuenta;
+    }
+
+    public void setTipoCuenta(TiposCuenta tipoCuenta) {
+        this.tipoCuenta = tipoCuenta;
+    }
+
+    public double getCuota() {
+        return cuota;
+    }
+
+    public void setCuota(double cuota) {
         this.cuota = this.tipoCuenta.getCuota();
+    }
+
+    public LocalDate getFechaPago() {
+        return fechaPago;
+    }
+
+    public void setFechaPago(LocalDate fechaPago) {
+        this.fechaPago = fechaPago;
     }
 }

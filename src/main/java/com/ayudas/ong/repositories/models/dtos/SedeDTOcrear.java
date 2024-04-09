@@ -11,20 +11,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 
-public class SedeDTO implements Serializable {
+public class SedeDTOcrear implements Serializable {
 
     private String nombre;
 
-    private List<SocioDTO> socios;
+    private List<Long> socios;
 
-    private CiudadDTO ciudad;
+    private String ciudad;
 
-    private List<VoluntarioDTO> voluntarios;
+    private List<Long> voluntarios;
 
     private String direccion;
 
-    private DirectorDTO director;
+    private String director;
 
-    private List<EnvioDTO> enviosAyudas;
+    private List<Long> enviosAyudas;
     
 }
