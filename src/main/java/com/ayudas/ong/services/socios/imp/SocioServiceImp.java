@@ -28,6 +28,7 @@ public class SocioServiceImp implements SocioServices {
     private final SocioDTOConvert socioDTOConvert;
     private final RolServiceImpPriv rolServiceImpPriv;
     private final SedeServicesPriv sedeServicesPriv;
+    private final SocioServicePrivImp socioServicePrivImp;
 
     @Override
     public List<SocioDTO> findAll() {
@@ -74,22 +75,31 @@ public class SocioServiceImp implements SocioServices {
     @Override
     public SocioDTO crear(SocioDTOcrear socioDTOcrear) throws ManagerAccessExcp {
 
-        socioDTOcrear.setRol(socioDTOcrear.getRol().toUpperCase());
+        Socio socio = socioServicePrivImp.findByCedula(socioDTOcrear.getCedula());
 
-        Rol rol = rolServiceImpPriv.findByNombre(socioDTOcrear.getRol());
-        Sede sede = sedeServicesPriv.findByNombre(socioDTOcrear.getSede());
+        System.out.println(socio);
 
-        if(sede == null) {
-            throw new ManagerAccessExcp("Dato no encontrado", new Throwable(" ( Sede ) " + socioDTOcrear.getSede() + " no se encuentra registrada"));
+        if(socio != null) {
+            throw new ManagerAccessExcp("Socio existente", new Throwable(" El socio que se intenta crear, ya existe"));
         }
-        if(rol == null) {
-            throw new ManagerAccessExcp("Dato no encontrado", new Throwable(" ( Rol ) " + socioDTOcrear.getRol() + " no se encuentra registrada"));
-        }
+        else {
+            socioDTOcrear.setRol(socioDTOcrear.getRol().toUpperCase());
 
-        System.out.println(sede.toString());
-        
-        return socioDTOConvert.socioToDTO(
-                socioRepository.save(socioDTOConvert.socioDtoCrearToEntity(socioDTOcrear, rol, sede)));
+            Rol rol = rolServiceImpPriv.findByNombre(socioDTOcrear.getRol());
+            Sede sede = sedeServicesPriv.findByNombre(socioDTOcrear.getSede());
+
+            if(sede == null) {
+                throw new ManagerAccessExcp("Dato no encontrado", new Throwable(" ( Sede ) " + socioDTOcrear.getSede() + " no se encuentra registrada"));
+            }
+            if(rol == null) {
+                throw new ManagerAccessExcp("Dato no encontrado", new Throwable(" ( Rol ) " + socioDTOcrear.getRol() + " no se encuentra registrada"));
+            }
+
+            System.out.println(sede.toString());
+            
+            return socioDTOConvert.socioToDTO(
+                    socioRepository.save(socioDTOConvert.socioDtoCrearToEntity(socioDTOcrear, rol, sede)));
+        }
 
     }
 

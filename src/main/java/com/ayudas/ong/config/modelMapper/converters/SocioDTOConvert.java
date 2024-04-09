@@ -45,4 +45,19 @@ public class SocioDTOConvert {
         return socio;
     }
 
+    public Socio socioCargarDataDtoCrear(Socio socio, SocioDTOcrear socioDTOcrear, Rol rol, Sede sede) {
+
+        socio.setCuentaBancaria(socioDTOcrear.getCuentaBancaria());
+        socio.setEmail(socioDTOcrear.getEmail());
+        socio.setP_nombre(socioDTOcrear.getP_apellido());
+        socio.setS_nombre(socioDTOcrear.getS_nombre());
+        socio.setP_apellido(socioDTOcrear.getP_apellido());
+        socio.setS_apellido(socioDTOcrear.getS_apellido());
+        socio.setPassWord(socioDTOcrear.getPassWord());
+        
+
+        return socio;
+
+    }
+
 }
