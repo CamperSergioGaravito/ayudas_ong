@@ -18,6 +18,7 @@ import com.ayudas.ong.repositories.models.dtos.para_anidar.SedeDTOmostrar;
 import com.ayudas.ong.services.ciudad.CiudadServicePriv;
 import com.ayudas.ong.services.director.imp.DirectorServicePriv;
 import com.ayudas.ong.services.sede.SedeServices;
+import com.ayudas.ong.services.sede.SedeServicesPriv;
 import com.ayudas.ong.util.exceptions.data_access.ManagerAccessExcp;
 
 import lombok.AllArgsConstructor;
@@ -28,9 +29,11 @@ public class SedeServiceImpl implements SedeServices {
 
     private final SedeRepository sedeRepository;
     private final SedeConverter sedeConverter;
+    
     // Servicios Privados
     private final DirectorServicePriv directorServicePriv;
     private final CiudadServicePriv ciudadServicePriv;
+    private final SedeServicesPriv sedeServicesPriv;
 
     @Transactional(readOnly = true)
     @Override
@@ -105,8 +108,12 @@ public class SedeServiceImpl implements SedeServices {
     @Transactional
     @Override
     public void delete(final String nombre) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        Sede sede = sedeServicesPriv.findByNombre(nombre);
+
+        sede.getVoluntarios().forEach(
+            voluntario -> voluntario.setSede(null)
+        );
+        sedeRepository.delete(sede);
     }
 
     @Transactional(readOnly = true)

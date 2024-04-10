@@ -3,6 +3,7 @@ package com.ayudas.ong.repositories.entities;
 import com.ayudas.ong.repositories.enums.Disponibilidad;
 import com.ayudas.ong.repositories.enums.TipoVoluntario;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -37,7 +38,7 @@ public class Voluntario extends Persona {
 
     private int cantParticipacion;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(
         name = "sede_id"
     )
