@@ -37,14 +37,15 @@ public class SedeConverter {
         sedeDTO.setDirector(nombre);
 
         sedeDTO.setSocios(
-            sede.getSocios().stream()
-            .map(socio -> socioDTOConvert.socioToDTO(socio)).toList()
-        );
+                sede.getSocios().stream()
+                        .map(socio -> socioDTOConvert.socioToDTO(socio)).toList());
 
-        /* sedeDTO.setVoluntarios(
-            sede.getVoluntarios().stream()
-            .map(voluntario -> )
-        ); */
+        /*
+         * sedeDTO.setVoluntarios(
+         * sede.getVoluntarios().stream()
+         * .map(voluntario -> )
+         * );
+         */
 
         return sedeDTO;
     }
@@ -57,7 +58,7 @@ public class SedeConverter {
         return sede;
     }
 
-    public Sede updateEntityDtoUpdate(Sede sede, SedeDTOupdate sedeDTOupdate, Director director, Ciudad ciudad){
+    public Sede updateEntityDtoUpdate(Sede sede, SedeDTOupdate sedeDTOupdate, Director director, Ciudad ciudad) {
         sede.setNombre(sedeDTOupdate.getNombre());
         sede.setCiudad(ciudad);
         sede.setDireccion(sedeDTOupdate.getDireccion());
@@ -70,29 +71,62 @@ public class SedeConverter {
         SedeDTOmostrar sedeDTOmostrar = model.map(sede, SedeDTOmostrar.class);
 
         sedeDTOmostrar.setSocios(
-            sede.getSocios().stream()
-            .map(socio -> socio.getP_nombre().concat(" ")
-            .concat(socio.getS_nombre()).concat(" ")
-            .concat(socio.getP_apellido()).concat(" ")
-            .concat(socio.getS_apellido())
-            ).toList()
-        );
+                sede.getSocios().stream()
+                        .map(socio -> socio.getP_nombre().concat(" ")
+                                .concat(socio.getS_nombre()).concat(" ")
+                                .concat(socio.getP_apellido()).concat(" ")
+                                .concat(socio.getS_apellido()))
+                        .toList());
 
         sedeDTOmostrar.setVoluntarios(
-            sede.getVoluntarios().stream()
-            .map(
-                voluntario -> voluntario.getP_nombre().concat(" ")
-                .concat(voluntario.getS_nombre()).concat(" ")
-                .concat(voluntario.getP_apellido()).concat(" ")
-                .concat(voluntario.getS_apellido())
-            ).toList()
-        );
+                sede.getVoluntarios().stream()
+                        .map(
+                                voluntario -> {
+
+                                    String nombre = "";
+                                    nombre = nombre.concat(voluntario.getP_nombre())
+                                            .concat(" ");
+
+                                    if (voluntario.getS_nombre() != null) {
+                                        nombre = nombre.concat(voluntario.getS_nombre()).concat(" ");
+                                    }
+
+                                    nombre = nombre.concat(voluntario.getP_apellido());
+                                    if (voluntario.getS_apellido() != null) {
+                                        nombre = nombre.concat(" ");
+                                        nombre = nombre.concat(voluntario.getS_apellido());
+                                    }
+
+                                    return nombre;
+
+                                })
+                        .toList());
 
         sedeDTOmostrar.setCiudad(sede.getCiudad().getNombre());
 
-        sedeDTOmostrar.setDirector(sede.getDirector().getP_nombre().concat(" ")
-            .concat(sede.getDirector().getS_nombre())
-        );
+        
+        String director = "";
+
+        if(sede.getDirector() != null) {
+            director = director.concat(sede.getDirector().getP_nombre())
+                    .concat(" ");
+
+            if (sede.getDirector().getS_nombre() != null) {
+                director = director.concat(sede.getDirector().getS_nombre()).concat(" ");
+            }
+
+            director = director.concat(sede.getDirector().getP_apellido());
+
+            if (sede.getDirector().getS_apellido() != null) {
+                director = director.concat(" ");
+                director = director.concat(sede.getDirector().getS_apellido());
+            }
+        }
+        else {
+            director = "Sin asignar";
+        }
+
+        sedeDTOmostrar.setDirector(director);
 
         return sedeDTOmostrar;
     }

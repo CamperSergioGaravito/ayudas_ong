@@ -34,10 +34,10 @@ public class SedeServiceImpl implements SedeServices {
 
     @Transactional(readOnly = true)
     @Override
-    public List<SedeDTO> findAll() {
-        List<SedeDTO> sedes = new ArrayList<>();
+    public List<SedeDTOmostrar> findAll() {
+        List<SedeDTOmostrar> sedes = new ArrayList<>();
         sedeRepository.findAll()
-                .forEach(sede -> sedes.add(sedeConverter.entityToDto(sede)));
+                .forEach(sede -> sedes.add(sedeConverter.entityToDtoMostrar(sede)));
 
         return sedes;
     }

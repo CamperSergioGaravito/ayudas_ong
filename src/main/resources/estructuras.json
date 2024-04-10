@@ -56,10 +56,10 @@
     },
     "Actualizar sede": {
         "metodo": "put",
-        "url": "localhost:8080/api/v1/admin/update/sede/sede-K",
+        "url": "localhost:8080/api/v1/admin/update/sede/sede-J",
         "data": {
-            "nombre": "Sede K",
-            "ciudad": "Medellin",
+            "nombre": "Sede J",
+            "ciudad": "Bello",
             "direccion": "Calle 21 AV 14",
             "director": 1234567890
         }

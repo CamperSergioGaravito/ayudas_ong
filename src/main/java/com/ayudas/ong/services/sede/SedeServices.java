@@ -9,7 +9,7 @@ import com.ayudas.ong.repositories.models.dtos.para_anidar.SedeDTOmostrar;
 
 public interface SedeServices {
 
-    List<SedeDTO> findAll();
+    List<SedeDTOmostrar> findAll();
 
     SedeDTO crear(final SedeDTOcrear sedeDTOcrear);
 
