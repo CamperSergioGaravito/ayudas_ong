@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ayudas.ong.config.modelMapper.converters.RolDTOConvert;
+import com.ayudas.ong.components.converters.RolDTOConvert;
 import com.ayudas.ong.repositories.RolRepository;
 import com.ayudas.ong.repositories.enums.Roles;
 import com.ayudas.ong.repositories.models.dtos.RolDTO;

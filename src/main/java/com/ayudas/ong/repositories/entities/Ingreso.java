@@ -30,6 +30,8 @@ public class Ingreso implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String codigo;
+
     @ManyToOne
     @JoinColumn(
         name = "socio_id"
@@ -82,5 +84,51 @@ public class Ingreso implements Serializable {
 
     public void setFechaPago(LocalDate fechaPago) {
         this.fechaPago = fechaPago;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+    public void setCodigo() {
+        this.codigo = String.valueOf(this.fechaPago.getDayOfYear()) + String.valueOf(this.socio.getCedula()) + String.valueOf(this.id);
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((socio == null) ? 0 : socio.hashCode());
+        result = prime * result + ((tipoCuenta == null) ? 0 : tipoCuenta.hashCode());
+        long temp;
+        temp = Double.doubleToLongBits(cuota);
+        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + ((fechaPago == null) ? 0 : fechaPago.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Ingreso other = (Ingreso) obj;
+        if (socio == null) {
+            if (other.socio != null)
+                return false;
+        } else if (!socio.equals(other.socio))
+            return false;
+        if (tipoCuenta != other.tipoCuenta)
+            return false;
+        if (Double.doubleToLongBits(cuota) != Double.doubleToLongBits(other.cuota))
+            return false;
+        if (fechaPago == null) {
+            if (other.fechaPago != null)
+                return false;
+        } else if (!fechaPago.equals(other.fechaPago))
+            return false;
+        return true;
     }
 }
