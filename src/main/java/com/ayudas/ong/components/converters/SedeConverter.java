@@ -1,8 +1,5 @@
 package com.ayudas.ong.components.converters;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +10,6 @@ import com.ayudas.ong.repositories.models.dtos.SedeDTO;
 import com.ayudas.ong.repositories.models.dtos.actualizar.SedeDTOupdate;
 import com.ayudas.ong.repositories.models.dtos.crear.SedeDTOcrear;
 import com.ayudas.ong.repositories.models.dtos.para_anidar.SedeDTOmostrar;
-import com.ayudas.ong.repositories.models.dtos.SocioDTO;
 
 import lombok.AllArgsConstructor;
 

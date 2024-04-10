@@ -2,7 +2,6 @@ package com.ayudas.ong.controllers.update;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ayudas.ong.repositories.models.dtos.SedeDTO;
 import com.ayudas.ong.repositories.models.dtos.SocioDTO;
 import com.ayudas.ong.repositories.models.dtos.actualizar.SedeDTOupdate;
 import com.ayudas.ong.repositories.models.dtos.actualizar.SocioDTOupdate;
