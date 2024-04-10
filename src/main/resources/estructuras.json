@@ -38,6 +38,10 @@
     "Eliminar socio": {
         "metodo": "delete",
         "url": "localhost:8080/api/v1/admin/delete/socio/1212345"
+    },
+    "Listar socios por tipo de cuenta": {
+        "metodo": "get",
+        "url": "localhost:8080/api/v1/admin/visualizar/socios/tipo-cuenta/maxima"
     }
     
     

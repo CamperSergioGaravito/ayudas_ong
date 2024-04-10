@@ -17,7 +17,7 @@ import lombok.Setter;
 
 public class IngresoDTO implements Serializable {
 
-    private SocioDTO socio;
+    private SocioDTOingreso socio;
 
     private TiposCuenta tipoCuenta;
 

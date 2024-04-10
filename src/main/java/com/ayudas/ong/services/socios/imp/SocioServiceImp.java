@@ -4,21 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.ayudas.ong.config.modelMapper.converters.SocioDTOConvert;
+import com.ayudas.ong.components.converters.SocioDTOConvert;
 import com.ayudas.ong.repositories.SocioRepository;
 import com.ayudas.ong.repositories.entities.Rol;
 import com.ayudas.ong.repositories.entities.Sede;
 import com.ayudas.ong.repositories.entities.Socio;
+import com.ayudas.ong.repositories.models.dtos.IngresoDTO;
 import com.ayudas.ong.repositories.models.dtos.SocioDTO;
 import com.ayudas.ong.repositories.models.dtos.SocioDTOcrear;
 import com.ayudas.ong.repositories.models.dtos.SocioDTOupdate;
+import com.ayudas.ong.services.Ingresos.IngresosService;
 import com.ayudas.ong.services.rol.imp.RolServiceImpPriv;
 import com.ayudas.ong.services.sede.SedeServicesPriv;
 import com.ayudas.ong.services.socios.SocioServices;
 import com.ayudas.ong.util.exceptions.data_access.ManagerAccessExcp;
 
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -27,10 +29,13 @@ public class SocioServiceImp implements SocioServices {
 
     private final SocioRepository socioRepository;
     private final SocioDTOConvert socioDTOConvert;
+    private final IngresosService ingresosService;
+    // Servicios privados
     private final RolServiceImpPriv rolServiceImpPriv;
     private final SedeServicesPriv sedeServicesPriv;
     private final SocioServicePrivImp socioServicePrivImp;
 
+    @Transactional(readOnly = true)
     @Override
     public List<SocioDTO> findAll() {
         List<SocioDTO> sDtos = new ArrayList<>();
@@ -48,6 +53,7 @@ public class SocioServiceImp implements SocioServices {
                         socioDTOConvert.SocioDtoToEntity(socioDTO)));
     }
 
+    @Transactional
     @Override
     public SocioDTO update(Long cedula, SocioDTOupdate socioDTOupdate) throws ManagerAccessExcp {
         Socio socio = socioServicePrivImp.findByCedula(cedula);
@@ -62,6 +68,7 @@ public class SocioServiceImp implements SocioServices {
 
     }
 
+    @Transactional
     @Override
     public void delete(Long cedula) {
         Socio socio = socioServicePrivImp.findByCedula(cedula);
@@ -73,6 +80,7 @@ public class SocioServiceImp implements SocioServices {
         }
     }
 
+    @Transactional(readOnly = true)
     @Override
     public SocioDTO findByEmail(String email) {
         Socio socio = socioServicePrivImp.findByEmail(email);
@@ -115,10 +123,15 @@ public class SocioServiceImp implements SocioServices {
 
     }
 
+    @Transactional(readOnly = true)
     @Override
     public SocioDTO findByCedula(long cedula) {
         return socioDTOConvert.socioToDTO(
                 socioRepository.findByCedula(cedula));
+    }
+
+    public List<IngresoDTO> buscarSocioByTipoCuenta(String tipo) {
+        return ingresosService.findByTipoCuenta(tipo);
     }
 
 }

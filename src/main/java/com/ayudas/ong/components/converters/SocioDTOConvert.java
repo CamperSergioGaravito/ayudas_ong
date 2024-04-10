@@ -1,4 +1,4 @@
-package com.ayudas.ong.config.modelMapper.converters;
+package com.ayudas.ong.components.converters;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +9,17 @@ import com.ayudas.ong.repositories.entities.Sede;
 import com.ayudas.ong.repositories.entities.Socio;
 import com.ayudas.ong.repositories.models.dtos.SocioDTO;
 import com.ayudas.ong.repositories.models.dtos.SocioDTOcrear;
+import com.ayudas.ong.repositories.models.dtos.SocioDTOingreso;
 import com.ayudas.ong.repositories.models.dtos.SocioDTOupdate;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 @Component
 public class SocioDTOConvert {
 
     @Autowired
-    ModelMapper model;
+    private final ModelMapper model;
 
     @Autowired
     RolDTOConvert rolDTOConvert;
@@ -57,6 +61,12 @@ public class SocioDTOConvert {
 
         return socio;
 
+    }
+
+    public SocioDTOingreso entityToDtoIngreso(Socio socio) {
+        SocioDTOingreso socioDTOingreso = model.map(socio, SocioDTOingreso.class);
+
+        return socioDTOingreso;
     }
 
 }

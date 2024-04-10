@@ -8,7 +8,8 @@ public enum Roles {
     ASSISTANT;
 
     public static boolean exists(String value) {
-        return Arrays.stream(Roles.values()).anyMatch(role -> role.name().equalsIgnoreCase(value));
+        return Arrays.stream(Roles.values())
+                .anyMatch(role -> role.name().equalsIgnoreCase(value));
     }
 
 }
