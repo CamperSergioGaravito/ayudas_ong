@@ -8,9 +8,9 @@ import com.ayudas.ong.repositories.entities.Rol;
 import com.ayudas.ong.repositories.entities.Sede;
 import com.ayudas.ong.repositories.entities.Socio;
 import com.ayudas.ong.repositories.models.dtos.SocioDTO;
-import com.ayudas.ong.repositories.models.dtos.SocioDTOcrear;
-import com.ayudas.ong.repositories.models.dtos.SocioDTOingreso;
-import com.ayudas.ong.repositories.models.dtos.SocioDTOupdate;
+import com.ayudas.ong.repositories.models.dtos.actualizar.SocioDTOupdate;
+import com.ayudas.ong.repositories.models.dtos.crear.SocioDTOcrear;
+import com.ayudas.ong.repositories.models.dtos.para_anidar.SocioDTOingreso;
 
 import lombok.AllArgsConstructor;
 

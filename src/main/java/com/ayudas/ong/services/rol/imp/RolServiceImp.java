@@ -9,7 +9,7 @@ import com.ayudas.ong.components.converters.RolDTOConvert;
 import com.ayudas.ong.repositories.RolRepository;
 import com.ayudas.ong.repositories.enums.Roles;
 import com.ayudas.ong.repositories.models.dtos.RolDTO;
-import com.ayudas.ong.repositories.models.dtos.RolDTOcrear;
+import com.ayudas.ong.repositories.models.dtos.crear.RolDTOcrear;
 import com.ayudas.ong.services.rol.RolServices;
 
 import lombok.AllArgsConstructor;

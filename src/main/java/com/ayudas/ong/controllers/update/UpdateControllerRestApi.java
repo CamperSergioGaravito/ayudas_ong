@@ -3,7 +3,10 @@ package com.ayudas.ong.controllers.update;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ayudas.ong.repositories.models.dtos.SocioDTO;
-import com.ayudas.ong.repositories.models.dtos.SocioDTOupdate;
+import com.ayudas.ong.repositories.models.dtos.actualizar.SedeDTOupdate;
+import com.ayudas.ong.repositories.models.dtos.actualizar.SocioDTOupdate;
+import com.ayudas.ong.repositories.models.dtos.para_anidar.SedeDTOmostrar;
+import com.ayudas.ong.services.sede.SedeServices;
 import com.ayudas.ong.services.socios.SocioServices;
 
 import jakarta.validation.Valid;
@@ -31,6 +34,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class UpdateControllerRestApi {
 
     private final SocioServices socioServices;
+    private final SedeServices sedeServices;
 
     @PutMapping("/socio/{cedula}")
     public ResponseEntity<Map<String, Object>> actualizarSocio(@Valid @PathVariable long cedula, @RequestBody SocioDTOupdate socio, BindingResult result) {
@@ -65,5 +69,46 @@ public class UpdateControllerRestApi {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     
-    
+    @PutMapping("/sede/{nombre}")
+    public ResponseEntity<Map<String, Object>> actualizarSede(@Valid @PathVariable String nombre, @RequestBody SedeDTOupdate sedeDTOupdate, BindingResult result) {
+        
+
+        nombre = nombre.replace("-", " ");
+        SedeDTOmostrar sedeDTO = null;
+        Map<String,Object> response = new HashMap<>();
+
+        if(result.hasErrors()) {
+            List<String> errors = result.getFieldErrors()
+                .stream()
+                .map(
+                    error -> error.getField() + " " + error.getDefaultMessage()
+                )
+                .collect(Collectors.toList());
+            
+            response.put("Errores", errors);
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+
+        try {
+            sedeDTO = sedeServices.updateInfoBasic(nombre, sedeDTOupdate);
+
+        } catch (DataAccessException e) {
+            if(e.getMessage().contains("Duplicate entry")) {
+                response.put("Mensaje", "No se pudo completar la creación de la sede");
+                response.put("Error", "la ciudad de " + sedeDTOupdate.getCiudad() + " ya tiene una sede asignada");
+                return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+            else {
+                response.put("Mensaje", "No se pudo completar la actualización de la sede");
+                response.put("Error", e.getMessage().concat(":").concat(e.getMostSpecificCause().getMessage()));
+                return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+
+        response.put("Mensaje", "La sede fue actualizada con éxito.");
+        response.put("Sede", sedeDTO);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
 }

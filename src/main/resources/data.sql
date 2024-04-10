@@ -6,8 +6,13 @@ INSERT into roles ( nombre, descripcion) values
 (2, "permisos gestión: socios, voluntarios, envíos"),
 (3, "consultar reportes");
 
-INSERT INTO directores ( cedula, p_nombre, s_nombre, p_apellido, s_apellido, email, pass_word, rol_id)
-VALUES (123456789, "admin", NULL, "admin", NULL, "admin@mail.com", "admin", 1);
+INSERT INTO directores (cedula, p_nombre, s_nombre, p_apellido, s_apellido, email, pass_word, rol_id)
+VALUES (123456789, "admin", NULL, "admin", NULL, "admin@mail.com", "admin", 1),
+('1234567890', 'Carlos', 'Andrés', 'González', 'Pérez', 'director1@example.com', 'password123', 2),
+('2345678901', 'María', 'Isabel', 'López', 'Martínez', 'director2@example.com', 'securepass', 2),
+('3456789012', 'José', 'Luis', 'Hernández', 'García', 'director3@example.com', 'mysecret', 2),
+('4567890123', 'Ana', 'María', 'Díaz', 'Rodríguez', 'director4@example.com', 'abc123', 2),
+('5678901234', 'Pedro', 'Pablo', 'Martínez', 'Sánchez', 'director5@example.com', 'password321', 2);
 
 INSERT INTO ciudades (nombre)
 VALUES
@@ -117,3 +122,20 @@ INSERT INTO ingresos (codigo, cuota, fecha_pago, socio_id, tipo_cuenta) VALUES
 ("2023345098765413" ,10, '2023-01-27', 13, 1),
 ("2023450987654314" ,30, '2023-04-03', 14, 3),
 ("2023509876543215" ,20, '2023-06-08', 15, 2);
+
+INSERT INTO voluntarios (cedula, email, pass_word, p_nombre, s_nombre, p_apellido, s_apellido, tipo, disponibilidad, cant_participacion, profesion_id, rol_id, sede_id) VALUES
+('1234567890', 'voluntario1@example.com', 'password123', 'Juan', 'Carlos', 'González', 'Pérez', 1, 1, 3, 1, 3, 1),
+('2345678901', 'voluntario2@example.com', 'securepass', 'María', 'Isabel', 'López', 'Martínez', 2, 2, 2, 2, 3, 2),
+('3456789012', 'voluntario3@example.com', 'mysecret', 'José', 'Luis', 'Hernández', 'García', 1, 1, 4, 3, 3, 3),
+('4567890123', 'voluntario4@example.com', 'abc123', 'Ana', 'María', 'Díaz', 'Rodríguez', 2, 2, 1, 4, 3, 4),
+('5678901234', 'voluntario5@example.com', 'password321', 'Pedro', 'Pablo', 'Martínez', 'Sánchez', 1, 1, 5, 5, 3, 5),
+('6789012345', 'voluntario6@example.com', 'letmein', 'Laura', 'Beatriz', 'Gómez', 'Pérez', 2, 2, 0, 6, 3, 6),
+('7890123456', 'voluntario7@example.com', 'qwerty', 'Diego', 'Fernando', 'Alvarez', 'Fernández', 1, 1, 6, 7, 3, 7),
+('8901234567', 'voluntario8@example.com', 'hello123', 'Sofía', 'Gabriela', 'Torres', 'González', 2, 2, 4, 8, 3, 8),
+('9012345678', 'voluntario9@example.com', 'iloveyou', 'Daniel', 'Alejandro', 'Ramírez', 'Sánchez', 1, 1, 2, 9, 3, 9),
+('0123456789', 'voluntario10@example.com', '123456', 'Carolina', 'Mariana', 'Rojas', 'Martínez', 2, 2, 5, 10, 3, 10),
+('1234509876', 'voluntario11@example.com', 'password', 'Fernando', 'Javier', 'Gutiérrez', 'López', 1, 1, 1, 1, 3, 1),
+('2345098765', 'voluntario12@example.com', 'secure123', 'Andrea', 'Gabriela', 'Sánchez', 'García', 2, 2, 3, 2, 3, 2),
+('3450987654', 'voluntario13@example.com', 'letmeout', 'Ricardo', 'Alberto', 'Fernández', 'Gómez', 1, 1, 6, 3, 3, 3),
+('4509876543', 'voluntario14@example.com', 'admin123', 'Verónica', 'Marcela', 'Martínez', 'Hernández', 2, 2, 0, 4, 3, 4),
+('5098765432', 'voluntario15@example.com', 'changeme', 'Gonzalo', 'Sebastián', 'Pérez', 'Alvarez', 1, 1, 4, 5, 3, 5);

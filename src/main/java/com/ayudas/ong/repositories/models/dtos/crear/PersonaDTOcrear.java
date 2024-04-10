@@ -1,13 +1,14 @@
-package com.ayudas.ong.repositories.models.dtos;
+package com.ayudas.ong.repositories.models.dtos.crear;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class SocioDTOcrear {
+
+public abstract class PersonaDTOcrear {
 
     private long cedula;
 
@@ -24,9 +25,5 @@ public class SocioDTOcrear {
     private String email;
 
     private String passWord;
-
-    private Long cuentaBancaria;
-
-    private String sede;
 
 }

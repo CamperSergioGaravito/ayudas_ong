@@ -1,4 +1,4 @@
-package com.ayudas.ong.repositories.models.dtos;
+package com.ayudas.ong.repositories.models.dtos.crear;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 
-public class SocioDTOingreso extends PersonaDTO {
+public class SocioDTOcrear extends PersonaDTOcrear {
 
     private Long cuentaBancaria;
 
