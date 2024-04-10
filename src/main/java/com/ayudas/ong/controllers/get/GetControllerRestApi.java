@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/v1/{rol}/visualizar")
-public class SocioControllerRestApi {
+public class GetControllerRestApi {
 
     private final SocioServices socioServices;
 

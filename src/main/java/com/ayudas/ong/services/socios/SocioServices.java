@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.ayudas.ong.repositories.models.dtos.IngresoDTO;
 import com.ayudas.ong.repositories.models.dtos.SocioDTO;
-import com.ayudas.ong.repositories.models.dtos.SocioDTOcrear;
-import com.ayudas.ong.repositories.models.dtos.SocioDTOupdate;
+import com.ayudas.ong.repositories.models.dtos.actualizar.SocioDTOupdate;
+import com.ayudas.ong.repositories.models.dtos.crear.SocioDTOcrear;
 
 public interface SocioServices {
 
@@ -15,7 +15,7 @@ public interface SocioServices {
 
     SocioDTO save(final SocioDTO socioDTO);
 
-    SocioDTO update(final Long cedula, final SocioDTOupdate socioDTO);
+    SocioDTO update(final Long cedula, final SocioDTOupdate socioDTOupdate);
 
     void delete(final Long cedula);
 

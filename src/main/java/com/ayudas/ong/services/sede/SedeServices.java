@@ -3,7 +3,9 @@ package com.ayudas.ong.services.sede;
 import java.util.List;
 
 import com.ayudas.ong.repositories.models.dtos.SedeDTO;
-import com.ayudas.ong.repositories.models.dtos.SedeDTOcrear;
+import com.ayudas.ong.repositories.models.dtos.actualizar.SedeDTOupdate;
+import com.ayudas.ong.repositories.models.dtos.crear.SedeDTOcrear;
+import com.ayudas.ong.repositories.models.dtos.para_anidar.SedeDTOmostrar;
 
 public interface SedeServices {
 
@@ -13,9 +15,9 @@ public interface SedeServices {
 
     SedeDTO save(final SedeDTO sedeDTO);
 
-    SedeDTO update(final Long id, final SedeDTO sedeDTO);
+    SedeDTOmostrar updateInfoBasic(final String nombre, final SedeDTOupdate sedeDTOupdate);
 
-    void delete(final Long id);
+    void delete(final String nombre);
 
     SedeDTO findByNombre(final String nombre);
 

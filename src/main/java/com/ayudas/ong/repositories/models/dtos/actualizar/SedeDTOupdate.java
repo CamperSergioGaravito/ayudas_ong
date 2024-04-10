@@ -1,7 +1,6 @@
-package com.ayudas.ong.repositories.models.dtos;
+package com.ayudas.ong.repositories.models.dtos.actualizar;
 
 import java.io.Serializable;
-import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,20 +10,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 
-public class SedeDTOcrear implements Serializable {
+public class SedeDTOupdate implements Serializable {
 
     private String nombre;
 
-    private List<Long> socios;
-
     private String ciudad;
-
-    private List<Long> voluntarios;
 
     private String direccion;
 
-    private String director;
-
-    private List<Long> enviosAyudas;
+    private long director;
     
 }

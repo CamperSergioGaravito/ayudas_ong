@@ -1,13 +1,16 @@
-package com.ayudas.ong.repositories.models.dtos;
+package com.ayudas.ong.repositories.models.dtos.actualizar;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class SocioDTOupdate {
+@Getter
+@Setter
+
+public class DirectorDTOupdate {
 
     private String p_nombre;
 
@@ -17,8 +20,10 @@ public class SocioDTOupdate {
     
     private String s_apellido;
 
+    private String rol;
+
     private String email;
 
-    private Long cuentaBancaria;
+    private String sede;
 
 }

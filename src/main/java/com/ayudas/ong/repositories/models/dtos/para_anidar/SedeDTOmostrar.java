@@ -1,4 +1,4 @@
-package com.ayudas.ong.repositories.models.dtos;
+package com.ayudas.ong.repositories.models.dtos.para_anidar;
 
 import java.io.Serializable;
 import java.util.List;
@@ -11,20 +11,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 
-public class SedeDTO implements Serializable {
+public class SedeDTOmostrar implements Serializable {
 
     private String nombre;
 
-    private List<SocioDTO> socios;
+    private List<String> socios;
 
     private String ciudad;
 
-    private List<VoluntarioDTO> voluntarios;
+    private List<String> voluntarios;
 
     private String direccion;
 
     private String director;
-
-    private List<EnvioDTO> enviosAyudas;
     
 }

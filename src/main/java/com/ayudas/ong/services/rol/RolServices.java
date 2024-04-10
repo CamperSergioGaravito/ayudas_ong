@@ -3,7 +3,7 @@ package com.ayudas.ong.services.rol;
 import java.util.List;
 
 import com.ayudas.ong.repositories.models.dtos.RolDTO;
-import com.ayudas.ong.repositories.models.dtos.RolDTOcrear;
+import com.ayudas.ong.repositories.models.dtos.crear.RolDTOcrear;
 
 public interface RolServices {
 

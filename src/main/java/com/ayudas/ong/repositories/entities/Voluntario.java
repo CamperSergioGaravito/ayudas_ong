@@ -27,7 +27,7 @@ public class Voluntario extends Persona {
     @Enumerated(EnumType.STRING)
     private TipoVoluntario tipo;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(
         name = "profesion_id"
     )

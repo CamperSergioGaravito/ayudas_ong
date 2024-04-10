@@ -1,72 +1,62 @@
-package com.ayudas.ong.services.director.imp;
+package com.ayudas.ong.services.ciudad.imp;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ayudas.ong.repositories.DirectorRepository;
-import com.ayudas.ong.repositories.models.dtos.DirectorDTO;
-import com.ayudas.ong.repositories.models.dtos.actualizar.DirectorDTOupdate;
-import com.ayudas.ong.repositories.models.dtos.crear.DirectorDTOcrear;
-import com.ayudas.ong.services.director.DirectorServices;
+import com.ayudas.ong.repositories.CiudadRepository;
+import com.ayudas.ong.repositories.models.dtos.CiudadDTO;
+import com.ayudas.ong.services.ciudad.CiudadService;
 
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Service
-public class DirectorServiceImp implements DirectorServices {
+public class CiudadServiceImp implements CiudadService {
 
-    public DirectorRepository directorRepository;
+    private final CiudadRepository ciudadRepository;
 
     @Transactional(readOnly = true)
     @Override
-    public List<DirectorDTO> findAll() {
+    public List<CiudadDTO> findAll() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findAll'");
     }
 
     @Transactional
     @Override
-    public DirectorDTO crear(DirectorDTOcrear directorDTOcrear) {
+    public CiudadDTO crear(CiudadDTO ciudadDTO) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'crear'");
     }
 
     @Transactional
     @Override
-    public DirectorDTO save(DirectorDTO directorDTO) {
+    public CiudadDTO save(CiudadDTO sedeDTO) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'save'");
     }
 
     @Transactional
     @Override
-    public DirectorDTO update(Long cedula, DirectorDTOupdate directorDTOupdate) {
+    public CiudadDTO update(Long id, CiudadDTO sedeDTO) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
 
     @Transactional
     @Override
-    public void delete(Long cedula) {
+    public void delete(Long id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
 
     @Transactional(readOnly = true)
     @Override
-    public DirectorDTO findByEmail(String email) {
+    public CiudadDTO findByNombre(String nombre) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findByEmail'");
+        throw new UnsupportedOperationException("Unimplemented method 'findByNombre'");
     }
-
-    @Transactional(readOnly = true)
-    @Override
-    public DirectorDTO findByCedula(long cedula) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findByCedula'");
-    }
-
     
 }
