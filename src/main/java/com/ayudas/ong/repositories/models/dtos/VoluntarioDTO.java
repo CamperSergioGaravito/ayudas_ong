@@ -23,6 +23,6 @@ public class VoluntarioDTO extends PersonaDTO {
 
     private int cantParticipacion;
 
-    private SedeDTO sede;
+    private String sede;
     
 }

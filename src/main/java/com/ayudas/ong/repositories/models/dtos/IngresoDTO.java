@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 import com.ayudas.ong.repositories.enums.TiposCuenta;
+import com.ayudas.ong.repositories.models.dtos.para_anidar.SocioDTOingreso;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

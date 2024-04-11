@@ -8,7 +8,6 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,7 +26,7 @@ public class Voluntario extends Persona {
     @Enumerated(EnumType.STRING)
     private TipoVoluntario tipo;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(
         name = "profesion_id"
     )

@@ -42,6 +42,27 @@
     "Listar socios por tipo de cuenta": {
         "metodo": "get",
         "url": "localhost:8080/api/v1/admin/visualizar/socios/tipo-cuenta/maxima"
+    },
+
+    "Crear sede": {
+        "metodo": "post",
+        "url":"localhost:8080/api/v1/admin/crear/sede",
+        "data": {
+            "nombre": "Sede K",
+            "ciudad": "Medellin",
+            "direccion": "Calle 1 AV 12",
+            "director": 1234567890
+        }
+    },
+    "Actualizar sede": {
+        "metodo": "put",
+        "url": "localhost:8080/api/v1/admin/update/sede/sede-J",
+        "data": {
+            "nombre": "Sede J",
+            "ciudad": "Bello",
+            "direccion": "Calle 21 AV 14",
+            "director": 1234567890
+        }
     }
     
     

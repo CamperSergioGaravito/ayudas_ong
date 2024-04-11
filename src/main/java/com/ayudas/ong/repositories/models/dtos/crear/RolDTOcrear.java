@@ -1,4 +1,4 @@
-package com.ayudas.ong.repositories.models.dtos;
+package com.ayudas.ong.repositories.models.dtos.crear;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

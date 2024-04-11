@@ -3,6 +3,8 @@ package com.ayudas.ong.controllers.get;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ayudas.ong.repositories.models.dtos.IngresoDTO;
+import com.ayudas.ong.repositories.models.dtos.para_anidar.SedeDTOmostrar;
+import com.ayudas.ong.services.sede.SedeServices;
 import com.ayudas.ong.services.socios.SocioServices;
 
 import lombok.AllArgsConstructor;
@@ -24,9 +26,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/v1/{rol}/visualizar")
-public class SocioControllerRestApi {
+public class GetControllerRestApi {
 
     private final SocioServices socioServices;
+    private final SedeServices sedeServices;
 
     // Listar socios por tipo de cuota
 
@@ -48,6 +51,28 @@ public class SocioControllerRestApi {
         response.put("Mensaje", " Lista de socios");
         response.put("Tipo de cuenta", cuenta);
         response.put("Lista de socios", socios);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    // Listar sedes
+
+    @GetMapping("/sedes")
+    public ResponseEntity<Map<String, Object>> verSedes() {
+
+        Map<String, Object> response = new HashMap<>();
+        List<SedeDTOmostrar> sedes = new ArrayList<>();
+
+        try {
+            sedes = sedeServices.findAll();
+
+        } catch (DataAccessException e) {
+            response.put("Mensaje", "No se pudo obtener el listado");
+            response.put("Error", e.getMessage().concat(":").concat(e.getMostSpecificCause().getMessage()));
+            return new ResponseEntity<>(response,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        response.put("Mensaje", " Lista de sedes");
+        response.put("Sedes", sedes);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     
