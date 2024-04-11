@@ -5,6 +5,7 @@ import java.util.List;
 import com.ayudas.ong.repositories.enums.TipoVoluntario;
 import com.ayudas.ong.repositories.models.dtos.VoluntarioAdminDTO;
 import com.ayudas.ong.repositories.models.dtos.VoluntarioDTO;
+import com.ayudas.ong.repositories.models.dtos.actualizar.VoluntarioAdminDTOupdate;
 import com.ayudas.ong.repositories.models.dtos.actualizar.VoluntarioDTOupdate;
 import com.ayudas.ong.repositories.models.dtos.crear.VoluntarioDTOcrear;
 
@@ -19,7 +20,9 @@ public interface VoluntarioServices {
 
     VoluntarioDTO save(final VoluntarioDTO VoluntarioDTO);
 
-    VoluntarioDTO update(final Long cedula, final VoluntarioDTOupdate VoluntarioDTOupdate);
+    VoluntarioAdminDTO updateAdmin(final VoluntarioAdminDTOupdate voluntarioAdminDTOupdate, final long cedula);
+
+    VoluntarioDTO updateSanitario(final VoluntarioDTOupdate voluntarioDTOupdate);
 
     void delete(final Long cedula);
 
