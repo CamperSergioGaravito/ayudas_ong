@@ -23,6 +23,13 @@ import java.util.List;
 @Configuration
 public class SecurityConfig {
 
+    private static final String[] SWAGGER_WHITELIST = {
+        "/swagger-ui/**",
+        "/v3/api-docs/**",
+        "/swagger-resources/**",
+        "/swagger-resources"
+    };
+
     @Autowired
     public JWTValidationFilter jwtValidationFilter;
 
@@ -35,6 +42,7 @@ public class SecurityConfig {
                 http.authorizeHttpRequests(auth -> auth
                             .requestMatchers("/api/v1/admin/**").authenticated()
                             .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
+                            .requestMatchers(SWAGGER_WHITELIST).permitAll()
                             .anyRequest().permitAll())
                         .addFilterAfter(jwtValidationFilter, BasicAuthenticationFilter.class);
                 http.cors(cors -> corsConfigurationSource());
