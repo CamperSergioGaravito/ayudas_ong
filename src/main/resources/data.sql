@@ -1,5 +1,9 @@
+-- Active: 1707625446905@@127.0.0.1@3306@ong
+DROP DATABASE ong;
 
 CREATE DATABASE IF NOT EXISTS ONG;
+
+USE ong;
 
 INSERT into roles ( nombre, descripcion) values 
 (1, "permiso en todo"),

@@ -12,5 +12,7 @@ public interface VoluntarioRepository extends JpaRepository<Voluntario, Long>{
     List<Voluntario> findByTipo(TipoVoluntario tipo);
 
     Voluntario findByCedula(long cedula);
+
+    Voluntario findByEmail(String email);
     
 }
