@@ -10,5 +10,7 @@ import com.ayudas.ong.repositories.enums.TipoVoluntario;
 public interface VoluntarioRepository extends JpaRepository<Voluntario, Long>{
 
     List<Voluntario> findByTipo(TipoVoluntario tipo);
+
+    Voluntario findByCedula(long cedula);
     
 }

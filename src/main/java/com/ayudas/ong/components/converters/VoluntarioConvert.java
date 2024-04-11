@@ -27,6 +27,16 @@ public class VoluntarioConvert {
         return socioDTO;
     }
 
+    public VoluntarioDTO VoluntarioToDTO2(Voluntario socio) {
+        VoluntarioDTO socioDTO = model.map(socio, VoluntarioDTO.class);
+        return socioDTO;
+    }
+
+    public Voluntario dtoToEntity(VoluntarioDTO voluntarioDTO) {
+        Voluntario voluntario = model.map(voluntarioDTO, Voluntario.class);
+
+        return voluntario;
+    }
     
     
 }

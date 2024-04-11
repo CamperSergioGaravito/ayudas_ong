@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ayudas.ong.components.converters.SedeConverter;
+import com.ayudas.ong.components.converters.VoluntarioConvert;
 import com.ayudas.ong.repositories.SedeRepository;
 import com.ayudas.ong.repositories.entities.Ciudad;
 import com.ayudas.ong.repositories.entities.Director;
@@ -18,6 +19,7 @@ import com.ayudas.ong.repositories.models.dtos.para_anidar.SedeDTOmostrar;
 import com.ayudas.ong.services.ciudad.CiudadServicePriv;
 import com.ayudas.ong.services.director.imp.DirectorServicePriv;
 import com.ayudas.ong.services.sede.SedeServices;
+import com.ayudas.ong.services.voluntario.VoluntarioServices;
 import com.ayudas.ong.util.exceptions.data_access.ManagerAccessExcp;
 
 import lombok.AllArgsConstructor;
@@ -28,6 +30,8 @@ public class SedeServiceImpl implements SedeServices {
 
     private final SedeRepository sedeRepository;
     private final SedeConverter sedeConverter;
+    private final VoluntarioServices voluntarioServices;
+    private final VoluntarioConvert voluntarioConvert;
     // Servicios Privados
     private final DirectorServicePriv directorServicePriv;
     private final CiudadServicePriv ciudadServicePriv;
@@ -105,8 +109,17 @@ public class SedeServiceImpl implements SedeServices {
     @Transactional
     @Override
     public void delete(final String nombre) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        Sede sede = sedeRepository.findByNombre(nombre);
+
+        sede.getVoluntarios().forEach(
+            voluntario -> {
+                voluntarioServices.save(voluntarioConvert.VoluntarioToDTO(voluntario));
+            }
+        );;
+        sede = null;
+        sede = sedeRepository.findByNombre(nombre);
+
+        sedeRepository.delete(sede);
     }
 
     @Transactional(readOnly = true)

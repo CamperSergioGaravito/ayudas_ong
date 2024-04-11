@@ -45,9 +45,10 @@ public class VoluntarioServiceImpl implements VoluntarioServices{
     }
 
     @Override
-    public VoluntarioDTO save(VoluntarioDTO VoluntarioDTO) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
+    public VoluntarioDTO save(VoluntarioDTO voluntarioDTO) {
+        Voluntario voluntario = voluntarioRepository.findByCedula(voluntarioDTO.getCedula());
+        voluntario.setSede(null);
+        return voluntarioConvert.VoluntarioToDTO2(voluntarioRepository.save(voluntario));
     }
 
     @Override
